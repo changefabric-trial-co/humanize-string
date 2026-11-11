@@ -55,6 +55,20 @@ humanizeString('The-NetApp-Guide-to-Kubernetes', {preserveCase: true});
 //=> 'The NetApp Guide to Kubernetes'
 ```
 
+##### titleCase
+
+Type: `boolean`\
+Default: `false`
+
+Uppercase the first letter of every word.
+
+```js
+import humanizeString from 'humanize-string';
+
+humanizeString('The-NetApp-Guide-to-Kubernetes', {titleCase: true});
+//=> 'The Net App Guide To Kubernetes'
+```
+
 ##### acronyms
 
 Type: `string[]`

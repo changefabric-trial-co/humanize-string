@@ -376,3 +376,10 @@ test('acronyms option keeps given casing for matching words', () => {
 	assert.equal(humanizeString('api_url_parser', {acronyms: ['API']}), 'API url parser');
 	assert.equal(humanizeString('fooAPIBar', {preserveCase: true, acronyms: ['API']}), 'Foo API bar');
 });
+
+test('titleCase option capitalises every word', () => {
+	assert.equal(humanizeString('The-NetApp-Guide-to-Kubernetes', {titleCase: true}), 'The Net App Guide To Kubernetes');
+	assert.equal(humanizeString('The-NetApp-Guide-to-Kubernetes'), 'The net app guide to kubernetes');
+	assert.equal(humanizeString('The-NetApp-Guide-to-Kubernetes', {}), 'The net app guide to kubernetes');
+	assert.equal(humanizeString('unicorns_and-Rainbows_andPonies', {preserveCase: true, titleCase: true}), 'Unicorns And Rainbows AndPonies');
+});
