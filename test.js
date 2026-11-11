@@ -366,3 +366,13 @@ test('runs in linear time on adversarial input', () => {
 	// Quadratic behavior would take minutes.
 	assert.ok(performance.now() - start < 2000);
 });
+
+test('acronyms option keeps given casing for matching words', () => {
+	assert.equal(humanizeString('api_url_parser', {acronyms: ['API', 'URL']}), 'API URL parser');
+	assert.equal(humanizeString('getURLFromAPI', {acronyms: ['API', 'URL']}), 'Get URL from API');
+	assert.equal(humanizeString('api_url_parser'), 'Api url parser');
+	assert.equal(humanizeString('api_url_parser', {acronyms: []}), 'Api url parser');
+	assert.equal(humanizeString('api', {acronyms: ['Api']}), 'Api');
+	assert.equal(humanizeString('api_url_parser', {acronyms: ['API']}), 'API url parser');
+	assert.equal(humanizeString('fooAPIBar', {preserveCase: true, acronyms: ['API']}), 'Foo API bar');
+});

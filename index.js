@@ -24,12 +24,22 @@ export default function humanizeString(string, options = {}) {
 		throw new TypeError('Expected a string');
 	}
 
+	const hasAcronyms = Array.isArray(options.acronyms) && options.acronyms.length > 0;
+
 	if (!options.preserveCase) {
 		string = decamelize(string);
+	} else if (hasAcronyms) {
+		// Split camelCase words into separate words, while keeping consecutive uppercase letters (like an acronym) together, so acronyms can still be matched and replaced below.
+		string = decamelize(string, {preserveConsecutiveUppercase: true});
 	}
 
 	// `\s` misses U+0085 (next line), which is Unicode whitespace.
 	string = string.replaceAll(/[\s\p{White_Space}\-_]+/gv, ' ').trim();
+
+	if (hasAcronyms) {
+		const acronymMap = new Map(options.acronyms.map(acronym => [acronym.toLowerCase(), acronym]));
+		string = string.split(' ').map(word => acronymMap.get(word.toLowerCase()) ?? word).join(' ');
+	}
 
 	// The `v` flag makes `.` match a whole code point, where `charAt()` would split a surrogate pair and leave the first letter unuppercased. Spreading the string into an array of characters instead would use several times more memory than the string itself.
 	return string.replace(/^./sv, character => titlecase(character));
