@@ -18,6 +18,21 @@ export type Options = {
 	readonly preserveCase?: boolean;
 
 	/**
+	Uppercase the first letter of every word.
+
+	@default false
+
+	@example
+	```
+	import humanizeString from 'humanize-string';
+
+	humanizeString('The-NetApp-Guide-to-Kubernetes', {titleCase: true});
+	//=> 'The Net App Guide To Kubernetes'
+	```
+	*/
+	readonly titleCase?: boolean;
+
+	/**
 	A list of acronyms to keep in the exact casing given, matched case-insensitively against each word.
 
 	@example

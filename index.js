@@ -41,6 +41,12 @@ export default function humanizeString(string, options = {}) {
 		string = string.split(' ').map(word => acronymMap.get(word.toLowerCase()) ?? word).join(' ');
 	}
 
+	if (options.titleCase) {
+		// The `v` flag makes `.` match a whole code point, where `charAt()` would split a surrogate pair and leave the first letter unuppercased.
+		string = string.split(' ').map(word => word.replace(/^./sv, character => titlecase(character))).join(' ');
+		return string;
+	}
+
 	// The `v` flag makes `.` match a whole code point, where `charAt()` would split a surrogate pair and leave the first letter unuppercased. Spreading the string into an array of characters instead would use several times more memory than the string itself.
 	return string.replace(/^./sv, character => titlecase(character));
 }
