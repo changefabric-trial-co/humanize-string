@@ -55,6 +55,19 @@ humanizeString('The-NetApp-Guide-to-Kubernetes', {preserveCase: true});
 //=> 'The NetApp Guide to Kubernetes'
 ```
 
+##### acronyms
+
+Type: `string[]`
+
+A list of acronyms to keep in the exact casing given, matched case-insensitively against each word.
+
+```js
+import humanizeString from 'humanize-string';
+
+humanizeString('api_url_parser', {acronyms: ['API', 'URL']});
+//=> 'API URL parser'
+```
+
 ## Related
 
 - [camelcase](https://github.com/sindresorhus/camelcase) - Convert a dash/dot/underscore/space separated string to camelcase

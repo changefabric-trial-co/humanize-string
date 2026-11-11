@@ -16,6 +16,19 @@ export type Options = {
 	```
 	*/
 	readonly preserveCase?: boolean;
+
+	/**
+	A list of acronyms to keep in the exact casing given, matched case-insensitively against each word.
+
+	@example
+	```
+	import humanizeString from 'humanize-string';
+
+	humanizeString('api_url_parser', {acronyms: ['API', 'URL']});
+	//=> 'API URL parser'
+	```
+	*/
+	readonly acronyms?: readonly string[];
 };
 
 /**
